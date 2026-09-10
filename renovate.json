@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "pinDigests": true,
+  "enabledManagers": [
+    "docker-compose"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "postgres"
+      ],
+      "matchCurrentValue": "/^18\\.\\d+-alpine3\\.23$/",
+      "allowedVersions": "/^18\\.\\d+-alpine3\\.23$/"
+    },
+    {
+      "matchPackageNames": [
+        "sonarqube"
+      ],
+      "matchCurrentValue": "/^26\\.\\d+\\.\\d+-community$/",
+      "allowedVersions": "/^26\\.\\d+\\.\\d+-community$/"
+    }
+  ]
+}

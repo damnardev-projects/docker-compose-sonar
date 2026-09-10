@@ -1,0 +1,41 @@
+name: Docker Compose Validation
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compose-validation:
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy env.example to .env
+        run: cp env.example .env
+
+      - name: Docker Compose Syntax Check
+        run: docker compose -f docker-compose.yml --env-file .env config -q
+      
+      - name: Start Docker Compose
+        run: docker compose -f docker-compose.yml --env-file .env up -d --wait --wait-timeout 180
+
+      - name: Docker Compose Logger
+        if: failure()
+        run: docker compose -f docker-compose.yml --env-file .env logs
+
+      - name: Stop Docker Compose
+        if: always()
+        run: docker compose -f docker-compose.yml --env-file .env down -v
