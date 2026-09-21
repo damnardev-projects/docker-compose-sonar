@@ -2,7 +2,7 @@ name: ${PROJECT_NAME}
 
 services:
   db:
-    image: postgres:18.6-alpine3.23@sha256:e9fcfbcacfa25f66b0eea618adff3c473778463c95ea09bed245f32d4cb613e9
+    image: postgres:18.6-alpine3.23@sha256:885cf05d376c7cf27afef02073e6bdac3841252537f16e244fd1c1e6a7c99fb1
     container_name: ${PROJECT_NAME}-db
     labels:
       com.project.service: "database"
