@@ -57,7 +57,7 @@ services:
         max-size: "100m"
         max-file: "4"
   app:
-    image: sonarqube:26.9.0.129388-community@sha256:2561a3ceb4e80c3cd2db2a110683a896f99efb5363855a0c4876936d51a882ca
+    image: sonarqube:26.10.0.133078-community@sha256:d44ea91e0d10a8f8385b6878b384e4fc6bdad0d95446d06c3f71e49091c99200
     container_name: ${PROJECT_NAME}-app
     labels:
       com.project.service: "sonarqube"
